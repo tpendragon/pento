@@ -10,7 +10,8 @@ defmodule PentoWeb.WrongLive do
   end
 
   def handle_params(_params, _uri, socket) do
-    {:noreply, reset_params(socket)}
+    old_score = socket.assigns.score
+    {:noreply, reset_params(socket) |> assign(score: old_score)}
   end
 
   def handle_event("guess", %{"number" => guess}, socket = %{assigns: %{answer: guess}}) do
